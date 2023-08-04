@@ -18,7 +18,7 @@ describe("Blockshop", () => {
 
   beforeEach(async () => {
     [deployer, buyer] = await ethers.getSigners();
-    console.log(deployer, buyer);
+    // console.log(deployer, buyer);
 
     const Blockshop = await ethers.getContractFactory("Blockshop");
     blockshop = await Blockshop.deploy();
@@ -45,12 +45,16 @@ describe("Blockshop", () => {
       const item = await blockshop.items(ID);
 
       expect(item.id).to.equal(ID);
-      expect(time.name).to.equal(NAME);
+      expect(item.name).to.equal(NAME);
       expect(item.category).to.equal(CATEGORY);
       expect(item.image).to.equal(IMAGE);
       expect(item.cost).to.equal(COST);
       expect(item.rating).to.equal(RATING);
       expect(item.stock).to.equal(STOCK)
     });
+
+    it("Emits List event", () => {
+      expect(transaction).to.emit(blockshop, "List")
+    })
   });
 });
