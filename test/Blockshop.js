@@ -60,7 +60,7 @@ describe("Blockshop", () => {
     });
   });
 
-  describe("Liting", () => {
+  describe("Buying", () => {
     let transaction;
     beforeEach(async () => {
       transaction = await blockshop
@@ -95,6 +95,10 @@ describe("Blockshop", () => {
         const result = await ethers.provider.getBalance(blockshop.address);
         expect(result).to.equal(COST);
       });
+
+      it("Emits Buy event", () => {
+        expect(transaction).to.emit(blockshop, "Buy")
+      })
     });
   });
 });
