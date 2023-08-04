@@ -6,10 +6,15 @@ const tokens = (n) => {
 
 describe("Blockshop", () => {
   let blockshop;
+  let deployer, buyer
 
   beforeEach(async () => {
+    [deployer, buyer] = await ethers.getSigners()
+    console.log(deployer, buyer)
+
     const Blockshop = await ethers.getContractFactory("Blockshop");
     blockshop = await Blockshop.deploy();
+
   });
 
   describe("Deployment", () => {
