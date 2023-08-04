@@ -62,7 +62,7 @@ describe("Blockshop", () => {
 
   describe("Buying", () => {
     let transaction;
-    
+
     beforeEach(async () => {
       transaction = await blockshop
         .connect(deployer)
@@ -99,6 +99,32 @@ describe("Blockshop", () => {
 
       it("Emits Buy event", () => {
         expect(transaction).to.emit(blockshop, "Buy")
+      })
+
+      describe("Withdrawing", () => {
+        let balanceBefore
+
+        beforeEach(async () =>{
+          let transaction = await blockshop.connect(deployer).list(ID, CATEGORY, IMAGE, COST, RATING, STOCK)
+          await transaction.wait()
+
+          transaction = await blockshop.connect(buyer).buy(ID, { value: COST })
+
+          balanceBefore = await ethers.provider.getBalance(deployer.address)
+
+          transaction = await blockshop.connect(deployer).withdraw()
+          await transaction.wait()
+        })
+
+        it('Updates the owner balance', async () => {
+          const balanceAfter = await ethers.provider.getBalance(deployer.address)
+          expect(balanceAfter).to.be.greaterThan(balanceBefore)
+        })
+
+        it('Updates the contract balance', async () => {
+          const result = await ethers.provider.getBalance(blockshop.address)
+          expect(result).to.equal(0)
+        })
       })
     });
   });
