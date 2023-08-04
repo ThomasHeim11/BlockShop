@@ -25,6 +25,14 @@ describe("Blockshop", () => {
   describe("Listing", () => {
     let transaction;
 
+    const ID = 1
+    const NAME = "Shoes"
+    const CATEGORY = "Clothing"
+    const IMAGE = "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/shoes.jpg"
+    const COST = tokens(1)
+    const RATING = 4
+    const STOCK = 5
+
     beforeEach(async () => {
       transaction = await blockshop
         .connect(deployer)
@@ -34,8 +42,8 @@ describe("Blockshop", () => {
     });
 
     it("Returns item attributes", async () => {
-      const item = await blockshop.items(1)
-      expect(item.id).to.equal(1)
+      const item = await blockshop.items(ID)
+      expect(item.id).to.equal(ID)
     });
   });
 });
