@@ -1,16 +1,18 @@
 const { expect } = require("chai");
+const { transform } = require("typescript");
 
 const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), "ether");
 };
 
-const ID = 1
-const NAME = "Shoes"
-const CATEGORY = "Clothing"
-const IMAGE = "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/shoes.jpg"
-const COST = tokens(1)
-const RATING = 4
-const STOCK = 5
+const ID = 1;
+const NAME = "Shoes";
+const CATEGORY = "Clothing";
+const IMAGE =
+  "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/shoes.jpg";
+const COST = tokens(1);
+const RATING = 4;
+const STOCK = 5;
 
 describe("Blockshop", () => {
   let blockshop;
@@ -50,11 +52,34 @@ describe("Blockshop", () => {
       expect(item.image).to.equal(IMAGE);
       expect(item.cost).to.equal(COST);
       expect(item.rating).to.equal(RATING);
-      expect(item.stock).to.equal(STOCK)
+      expect(item.stock).to.equal(STOCK);
     });
 
     it("Emits List event", () => {
-      expect(transaction).to.emit(blockshop, "List")
-    })
+      expect(transaction).to.emit(blockshop, "List");
+    });
+  });
+ 
+  describe("Liting", () => {
+    let transaction;
+  beforeEach(async () => {
+    transaction = await blockshop
+      .connect(deployer)
+      .list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK);
+      await transaction.wait()
+
+      transaction = await blockshop.connect(buyer).buy(ID, { value: COST })
+
+   
+
+      beforeEach(async () => {
+        transaction = await blockshop.connect(deployer).list();
+      });
+
+      it("Updates the contract balance", async () => {
+        const result = await ethers.provider.getBalance(blockshop.address)
+        expect(result).to.equal(COST)
+      });
+    });
   });
 });
