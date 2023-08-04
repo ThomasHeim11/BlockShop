@@ -3,5 +3,9 @@ pragma solidity ^0.8.9;
 
 contract Blockshop {
 
-    string public name = "Blockshop";
+    string public name;
+
+    constructor() {
+        name = "Blockshop";
+    }
 }
