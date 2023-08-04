@@ -43,7 +43,14 @@ describe("Blockshop", () => {
 
     it("Returns item attributes", async () => {
       const item = await blockshop.items(ID);
+
       expect(item.id).to.equal(ID);
+      expect(time.name).to.equal(NAME);
+      expect(item.category).to.equal(CATEGORY);
+      expect(item.image).to.equal(IMAGE);
+      expect(item.cost).to.equal(COST);
+      expect(item.rating).to.equal(RATING);
+      expect(item.stock).to.equal(STOCK)
     });
   });
 });
