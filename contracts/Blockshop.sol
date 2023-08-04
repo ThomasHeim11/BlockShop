@@ -53,7 +53,7 @@ contract Blockshop {
 
     function buy(uint256 _id) public payable {
         Item memory item = items[_id];
-        
+
         require(msg.value >= item.cost);
         require(item.stock > 0);
 
@@ -65,5 +65,10 @@ contract Blockshop {
         items[_id].stock = item.stock - 1;
 
         emit Buy(msg.sender, orderCount[msg.sender], item.id);
+    }
+
+    function withdraw() public onlyOwner {
+        (bool success,) = owner.call{value: address(this).balance}("");
+        require(success);
     }
 }

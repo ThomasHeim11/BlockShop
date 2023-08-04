@@ -62,6 +62,7 @@ describe("Blockshop", () => {
 
   describe("Buying", () => {
     let transaction;
+    
     beforeEach(async () => {
       transaction = await blockshop
         .connect(deployer)
