@@ -59,32 +59,42 @@ describe("Blockshop", () => {
       expect(transaction).to.emit(blockshop, "List");
     });
   });
- 
+
   describe("Liting", () => {
     let transaction;
-  beforeEach(async () => {
-    transaction = await blockshop
-      .connect(deployer)
-      .list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK);
-      await transaction.wait()
+    beforeEach(async () => {
+      transaction = await blockshop
+        .connect(deployer)
+        .list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK);
+      await transaction.wait();
 
-      transaction = await blockshop.connect(buyer).buy(ID, { value: COST })
-
-   
+      transaction = await blockshop.connect(buyer).buy(ID, { value: COST });
 
       beforeEach(async () => {
         transaction = await blockshop.connect(deployer).list();
       });
 
       it("Updates the contract balance", async () => {
-        const result = await ethers.provider.getBalance(blockshop.address)
-        expect(result).to.equal(COST)
+        const result = await ethers.provider.getBalance(blockshop.address);
+        expect(result).to.equal(COST);
       });
 
       it("Updates buyer`s order count", async () => {
-        const result = await blockshop.orderCount(buyer.address)
-        expect(result).to.equal(1)
-      })
+        const result = await blockshop.orderCount(buyer.address);
+        expect(result).to.equal(1);
+      });
+
+      it("Adds the order", async () => {
+        const order = await blockshop.orders(buyer.address, 1);
+
+        expect(order.time).to.be.greaterThan(0);
+        expect(order.item.name).to.equal(NAME);
+      });
+
+      it("Updates the contract balance", async () => {
+        const result = await ethers.provider.getBalance(blockshop.address);
+        expect(result).to.equal(COST);
+      });
     });
   });
 });
