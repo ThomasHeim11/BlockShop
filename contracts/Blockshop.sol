@@ -18,6 +18,11 @@ contract Blockshop {
 
     event List(string name, uint256 cost, uint256 quantity);
 
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
     constructor() {
         owner = msg.sender;
     }
@@ -30,17 +35,8 @@ contract Blockshop {
         uint256 _cost,
         uint256 _rating,
         uint256 _stock
-    ) public {
-
-        Item memory item = Item(
-            _id,
-            _name,
-            _category,
-            _image, 
-            _cost, 
-            _rating, 
-            _stock
-        );
+    ) public onlyOwner {
+        Item memory item = Item(_id, _name, _category, _image, _cost, _rating, _stock);
 
         items[_id] = item;
 
