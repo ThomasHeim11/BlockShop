@@ -4,6 +4,14 @@ const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), "ether");
 };
 
+const ID = 1
+const NAME = "Shoes"
+const CATEGORY = "Clothing"
+const IMAGE = "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/shoes.jpg"
+const COST = tokens(1)
+const RATING = 4
+const STOCK = 5
+
 describe("Blockshop", () => {
   let blockshop;
   let deployer, buyer;
@@ -25,25 +33,17 @@ describe("Blockshop", () => {
   describe("Listing", () => {
     let transaction;
 
-    const ID = 1
-    const NAME = "Shoes"
-    const CATEGORY = "Clothing"
-    const IMAGE = "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/shoes.jpg"
-    const COST = tokens(1)
-    const RATING = 4
-    const STOCK = 5
-
     beforeEach(async () => {
       transaction = await blockshop
         .connect(deployer)
-        .list(1, "Shoes", "Clothing", "Image", 1, 4, 5);
+        .list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK);
 
       await transaction.wait();
     });
 
     it("Returns item attributes", async () => {
-      const item = await blockshop.items(ID)
-      expect(item.id).to.equal(ID)
+      const item = await blockshop.items(ID);
+      expect(item.id).to.equal(ID);
     });
   });
 });
