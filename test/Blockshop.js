@@ -9,6 +9,7 @@ describe("Blockshop", () => {
   it('has a name', async () => {
     const Blockshop = await ethers.getContractFactory("Blockshop")
     blockshop = await Blockshop.deploy()
+    const name = await blockshop.name()
     expect(await blockshop.name()).to.equal("Blockshop")
   })
 
