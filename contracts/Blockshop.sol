@@ -20,6 +20,8 @@ contract Blockshop {
     }
 
     mapping(uint256 => Item) public items;
+    mapping(address => uint256) public orderCount;
+    mapping(address => mapping (uint256 => Order)) public orders;
 
     event List(string name, uint256 cost, uint256 quantity);
 
@@ -51,5 +53,10 @@ contract Blockshop {
     function buy(uint256 _id) public payable {
         Item memory item = items[_id];
         Order memory order = Order(block.timestamp, item);
+        orderCount[msg.sender]++;
+
+        orderCount[msg.sender]++;
+        orders[msg.sender][orderCount[msg.sender]] = order;
+        items[_id].stock = item.stock - 1;
     }
 }
