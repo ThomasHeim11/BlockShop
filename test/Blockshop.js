@@ -18,7 +18,24 @@ describe("Blockshop", () => {
 
   describe("Deployment", () => {
     it("Sets the owner", async () => {
-      expect(await blockshop.owner()).to.equal(deployer.address)
-    })
-  })
+      expect(await blockshop.owner()).to.equal(deployer.address);
+    });
+  });
+
+  describe("Listing", () => {
+    let transaction;
+
+    beforeEach(async () => {
+      transaction = await blockshop
+        .connect(deployer)
+        .list(1, "Shoes", "Clothing", "Image", 1, 4, 5);
+
+      await transaction.wait();
+    });
+
+    it("Returns item attributes", async () => {
+      const item = await blockshop.items(1)
+      expect(item.id).to.equal(1)
+    });
+  });
 });
