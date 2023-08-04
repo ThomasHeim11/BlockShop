@@ -6,21 +6,19 @@ const tokens = (n) => {
 
 describe("Blockshop", () => {
   let blockshop;
-  let deployer, buyer
+  let deployer, buyer;
 
   beforeEach(async () => {
-    [deployer, buyer] = await ethers.getSigners()
-    console.log(deployer, buyer)
+    [deployer, buyer] = await ethers.getSigners();
+    console.log(deployer, buyer);
 
     const Blockshop = await ethers.getContractFactory("Blockshop");
     blockshop = await Blockshop.deploy();
-
   });
 
   describe("Deployment", () => {
-    it("has a name", async () => {
-      const name = await blockshop.name();
-      expect(await blockshop.name()).to.equal("Blockshop");
-    });
-  });
+    it("Sets the owner", async () => {
+      expect(await blockshop.owner()).to.equal(deployer.address)
+    })
+  })
 });
