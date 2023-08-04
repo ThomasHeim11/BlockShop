@@ -16,6 +16,8 @@ contract Blockshop {
 
     mapping(uint256 => Item) public items;
 
+    event List(string name, uint256 cost, uint256 quantity);
+
     constructor() {
         owner = msg.sender;
     }
@@ -41,5 +43,7 @@ contract Blockshop {
         );
 
         items[_id] = item;
+
+        emit List(_name, _cost, _stock);
     }
 }
