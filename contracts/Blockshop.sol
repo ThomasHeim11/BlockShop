@@ -14,6 +14,11 @@ contract Blockshop {
         uint256 stock;
     }
 
+    struct Order {
+        uint256 time;
+        Item item;
+    }
+
     mapping(uint256 => Item) public items;
 
     event List(string name, uint256 cost, uint256 quantity);
@@ -43,7 +48,8 @@ contract Blockshop {
         emit List(_name, _cost, _stock);
     }
 
-    function buy (uint256 _id) public payable {
-
+    function buy(uint256 _id) public payable {
+        Item memory item = items[_id];
+        Order memory order = Order(block.timestamp, item);
     }
 }
