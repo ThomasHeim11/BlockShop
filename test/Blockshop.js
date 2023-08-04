@@ -80,6 +80,11 @@ describe("Blockshop", () => {
         const result = await ethers.provider.getBalance(blockshop.address)
         expect(result).to.equal(COST)
       });
+
+      it("Updates buyer`s order count", async () => {
+        const result = await blockshop.orderCount(buyer.address)
+        expect(result).to.equal(1)
+      })
     });
   });
 });
