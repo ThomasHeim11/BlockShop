@@ -14,34 +14,43 @@ import config from "./config.json";
 import { use } from "chai";
 
 function App() {
-  const [provider, setProvider] = useState(null)
+  const [provider, setProvider] = useState(null);
   const [blockshop, setBlockshop] = useState(null);
 
-  const[account, setAccount] = useState(null)
+  const [account, setAccount] = useState(null);
+
+  const [electronics, setElectronics] = useState(null);
+  const [clothing, setClothing] = useState(null);
+  const [toys, setToys] = useState(null);
 
   const loadBlockchainData = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(provider)
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(provider);
 
-    const network = await provider.getNetwork()
-    console.log(network)
+    const network = await provider.getNetwork();
+    console.log(network);
 
     const blockshop = new ethers.Contract(
       config[network.chainId].blockshop.address,
       Blockshop,
       provider
-    )
-    setBlockshop(blockshop)
+    );
+    setBlockshop(blockshop);
 
-    const items = []
+    const items = [];
 
-    for (var i = 0; i <9; i++) {
-      const item = await blockshop.items(i + 1)
-      items.push(item)
+    for (var i = 0; i < 9; i++) {
+      const item = await blockshop.items(i + 1);
+      items.push(item);
     }
 
-    console.log(items)
-  
+    const electronics = items.filter((item) => item.category === "electronics");
+    const clothing = items.filter((item) => item.category === "Clothing");
+    const toys = items.filter((item) => item.category === "toys");
+
+    setElectronics(electronics);
+    setClothing(clothing);
+    setToys(toys);
   };
 
   useEffect(() => {
@@ -50,7 +59,7 @@ function App() {
 
   return (
     <div>
-      <Navigation account={account} setAccount={setAccount}/>
+      <Navigation account={account} setAccount={setAccount} />
       <h2>BlockShop Best Sellers</h2>
     </div>
   );
