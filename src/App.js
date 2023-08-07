@@ -15,7 +15,9 @@ import { use } from "chai";
 
 function App() {
   const [provider, setProvider] = useState(null)
-  const [account, setAccount] = useState(null);
+  const [blockshop, setBlockshop] = useState(null);
+
+  const[account, setAccount] = useState(null)
 
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -25,10 +27,20 @@ function App() {
     console.log(network)
 
     const blockshop = new ethers.Contract(
-      "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      config[network.chainId].blockshop.address,
       Blockshop,
       provider
     )
+    setBlockshop(blockshop)
+
+    const items = []
+
+    for (var i = 0; i <9; i++) {
+      const item = await blockshop.items(i + 1)
+      items.push(item)
+    }
+
+    console.log(items)
   
   };
 
