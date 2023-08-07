@@ -31,7 +31,7 @@ function App() {
   return (
     <div>
       <Navigation account={account} setAccount={setAccount}/>
-      <h2>Welcome to BlockShop</h2>
+      <h2>BlockShop Best Sellers</h2>
     </div>
   );
 }
