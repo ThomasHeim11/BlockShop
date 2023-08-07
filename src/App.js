@@ -23,6 +23,8 @@ function App() {
   const [clothing, setClothing] = useState(null);
   const [toys, setToys] = useState(null);
 
+  const togglePop = () => {};
+
   const loadBlockchainData = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
@@ -61,6 +63,16 @@ function App() {
     <div>
       <Navigation account={account} setAccount={setAccount} />
       <h2>BlockShop Best Sellers</h2>
+
+      {electronics &&
+        clothing &&
+        toys(
+          <Section
+            title={"Clothing & Jewelry"}
+            items={clothing}
+            togglePop={togglePop}
+          />
+        )}
     </div>
   );
 }
