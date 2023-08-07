@@ -35,7 +35,7 @@ function App() {
     setProvider(provider)
     const network = await provider.getNetwork()
 
-    const blockshop = new ethers.Contract(config[network.chainId].blockshop.address, blockshop, provider)
+    const blockshop = new ethers.Contract(config[network.chainId].blockshop.address, Blockshop, provider)
     setBlockshop(blockshop)
 
     const items = []
