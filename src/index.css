@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 * {
   margin: 0;
@@ -7,12 +7,12 @@
 }
 
 :root {
-  --clr-white: #FFFFFF;
+  --clr-white: #ffffff;
   --clr-black: #000000;
   --clr-grey: #707070;
   --clr-bunker: #131921;
   --clr-ebony-clay: #232f3e;
-  --clr-orange: #FF9900;
+  --clr-orange: #ff9900;
   --clr-orange-dark: #cc8111;
 }
 
@@ -21,6 +21,7 @@ body {
   font-family: "Open Sans";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(45deg, #b92b27, #1565C0);
 }
 
 h2 {
@@ -42,7 +43,7 @@ nav {
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
 
-  background-color: var(--clr-bunker);
+  background: linear-gradient(45deg, #FC466B, #3F5EFB);
 }
 
 .nav__brand {
@@ -103,7 +104,7 @@ nav {
   height: 40px;
   margin: 0 auto;
 
-  background-color: var(--clr-orange);
+  background: linear-gradient(45deg, #FDC830, #F37335);
   color: var(--clr-black);
 
   border: none;
@@ -171,7 +172,7 @@ nav {
 .card__info {
   width: 100%;
 
-  background-color: var(--clr-white);
+  background: linear-gradient(45deg, #c94b4b, #4b134f);
 
   padding: 5px 10px;
 
@@ -228,7 +229,7 @@ nav {
   transform: translate(-50%, -50%);
   z-index: 2;
 
-  background: var(--clr-white);
+  background: linear-gradient(45deg, #c94b4b, #4b134f);
 }
 
 .product__image {
