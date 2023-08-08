@@ -10,6 +10,7 @@ require("hardhat-deploy");
  * @type import('hardhat/config').HardhatUserConfig
  */
 
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 

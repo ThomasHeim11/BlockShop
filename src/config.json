@@ -1,7 +1,7 @@
 {
-    "31337": {
-        "blockshop": {
-            "address": "0x3CAF707Fc2FF49A47888d629b3C8f99AB35e39Da"
-        }
+  "11155111": {
+    "blockshop": {
+      "address": "0x3CAF707Fc2FF49A47888d629b3C8f99AB35e39Da"
     }
+  }
 }
