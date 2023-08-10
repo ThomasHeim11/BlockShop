@@ -1,4 +1,6 @@
 # BlockShop
+<img width="1737" alt="image" src="https://github.com/ThomasHeim11/BlockShop/assets/106417552/866db8a4-636e-4ada-8ceb-5ae3ae7f497d">
+
 
 ## Technology Stack & Tools
 
