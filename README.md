@@ -1,5 +1,6 @@
 # BlockShop
 <img width="1737" alt="image" src="https://github.com/ThomasHeim11/BlockShop/assets/106417552/866db8a4-636e-4ada-8ceb-5ae3ae7f497d">
+The smart contract is implemented in Solidity and facilitates the management of items for sale, while the React frontend interacts with the smart contract to display items and allow users to make purchases using Ether.
 
 
 ## Technology Stack & Tools
